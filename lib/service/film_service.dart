@@ -9,7 +9,7 @@ Future<Film> fechFilm() async {
   final response = await http.get(Uri.parse(
       "${Url.baseUrl}/trending/all/week?api_key=${Key.apiKey}&language=${General.lang}"));
   if (response.statusCode == 200) {
-    print(response.body);
+    // print(response.body);
     return Film.fromJson(jsonDecode(response.body));
   } else {
     throw Exception('Failed to load film');
