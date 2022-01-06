@@ -40,6 +40,7 @@ class Results {
   bool? video;
   double? voteAverage;
   String? title;
+  String? name;
   String? overview;
   String? releaseDate;
   double? popularity;
@@ -57,6 +58,7 @@ class Results {
     this.video,
     this.voteAverage,
     this.title,
+    this.name,
     this.overview,
     this.releaseDate,
     this.popularity,
@@ -75,6 +77,7 @@ class Results {
     video = json['video'] as bool?;
     voteAverage = json['vote_average'] as double?;
     title = json['title'] as String?;
+    name = json['name'] as String?;
     overview = json['overview'] as String?;
     releaseDate = json['release_date'] as String?;
     popularity = json['popularity'] as double?;
@@ -94,6 +97,7 @@ class Results {
     json['video'] = video;
     json['vote_average'] = voteAverage;
     json['title'] = title;
+    json['name'] = name;
     json['overview'] = overview;
     json['release_date'] = releaseDate;
     json['popularity'] = popularity;
