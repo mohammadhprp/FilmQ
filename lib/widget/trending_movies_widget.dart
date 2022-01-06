@@ -4,11 +4,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:film_q/model/api.dart' as api;
 
 class TrendingMovies extends StatelessWidget {
-  final String name;
 
   final String poster;
 
-  TrendingMovies(this.name, this.poster,
+  TrendingMovies(this.poster,
       {Key? key})
       : super(key: key);
 
