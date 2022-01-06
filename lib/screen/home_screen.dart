@@ -4,6 +4,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:film_q/model/film.dart';
 import 'package:film_q/service/film_service.dart';
 import 'package:film_q/widget/trending_movies_widget.dart';
+import 'package:film_q/widget/new_movies_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -48,9 +49,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 body: Container(
                     color: const Color(0xFF262626),
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Expanded(
-                          flex: 3,
+                          flex: 4,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -58,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               Container(
                                 alignment: Alignment.topLeft,
                                 margin: const EdgeInsets.only(
-                                    left: 22, bottom: 10, top: 20),
+                                    left: 22, bottom: 10, top: 90),
                                 child: const Text(
                                   'Trending',
                                   style: TextStyle(
@@ -70,7 +73,9 @@ class _HomeScreenState extends State<HomeScreen> {
                               CarouselSlider.builder(
                                   itemCount: snapshot.data!.results!.length,
                                   options: CarouselOptions(
-                                    autoPlay: false,
+                                    autoPlay: true,
+                                    autoPlayInterval:
+                                        const Duration(seconds: 5),
                                     height: 350,
                                     aspectRatio: 2.0,
                                     enlargeCenterPage: true,
@@ -79,20 +84,45 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                   itemBuilder: (context, index, id) {
                                     return TrendingMovies(
-                                        "${snapshot.data!.results![index].mediaType}" ==
-                                                "movie"
-                                            ? "${snapshot.data!.results![index].title}"
-                                            : "${snapshot.data!.results![index].name}",
                                         "${snapshot.data!.results![index].posterPath}");
                                   }),
                             ],
                           ),
                         ),
-                        const Expanded(
-                            flex: 1,
-                            child: Text(
-                              'New Movies',
-                              style: TextStyle(color: Colors.white),
+                        Expanded(
+                            flex: 2,
+                            child: Column(
+                              children: [
+                                Container(
+                                  alignment: Alignment.topLeft,
+                                  margin: const EdgeInsets.only(
+                                      left: 25, bottom: 10),
+                                  child: const Text(
+                                    'New Movies',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                CarouselSlider.builder(
+                                    itemCount: snapshot.data!.results!.length,
+                                    options: CarouselOptions(
+                                      autoPlay: false,
+                                      aspectRatio: 2.0,
+                                      enlargeCenterPage: true,
+                                      enlargeStrategy:
+                                          CenterPageEnlargeStrategy.height,
+                                    ),
+                                    itemBuilder: (context, index, id) {
+                                      return NewMovies(
+                                          "${snapshot.data!.results![index].mediaType}" ==
+                                                  "movie"
+                                              ? "${snapshot.data!.results![index].title}"
+                                              : "${snapshot.data!.results![index].name}",
+                                          "${snapshot.data!.results![index].backdropPath}");
+                                    }),
+                              ],
                             ))
                       ],
                     )));
