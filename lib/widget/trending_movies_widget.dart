@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-
 import 'package:film_q/model/api.dart' as api;
 
 class TrendingMovies extends StatelessWidget {
