@@ -75,7 +75,8 @@ class _DetailScreenState extends State<DetailScreen> {
                     color: const Color(0xFF262626),
                     child: DetailMovies(
                         "${snapshot.data!.title}",
-                        "${snapshot.data!.belongsToCollection!.backdropPath}",
+                        snapshot.data!.belongsToCollection == null ?
+                        "${snapshot.data!.backdropPath}" : "${snapshot.data!.belongsToCollection!.backdropPath}",
                         "${snapshot.data!.overview}",
                         snapshot.data!.genres as List<movie.Genres>,
                         "${snapshot.data!.releaseDate}",
