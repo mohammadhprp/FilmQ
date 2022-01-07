@@ -85,6 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   itemBuilder: (context, index, id) {
                                     return TrendingMovies(
                                         "${snapshot.data!.results![index].posterPath}",
+                                        "${snapshot.data!.results![index].mediaType}",
                                         snapshot.data!.results![index].id!
                                             .toInt());
                                   }),
@@ -125,6 +126,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               ? "${snapshot.data!.results![index].title}"
                                               : "${snapshot.data!.results![index].name}",
                                           "${snapshot.data!.results![index].backdropPath}",
+                                          "${snapshot.data!.results![index].mediaType}",
                                           snapshot.data!.results![index].id!
                                               .toInt());
                                     }),

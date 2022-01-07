@@ -1,4 +1,4 @@
-class DetailFilm {
+class DetailMovie {
   final bool? adult;
   final String? backdropPath;
   final BelongsToCollection? belongsToCollection;
@@ -25,7 +25,7 @@ class DetailFilm {
   final double? voteAverage;
   final int? voteCount;
 
-  DetailFilm({
+  DetailMovie({
     this.adult,
     this.backdropPath,
     this.belongsToCollection,
@@ -53,12 +53,18 @@ class DetailFilm {
     this.voteCount,
   });
 
-  DetailFilm.fromJson(Map<String, dynamic> json)
+  DetailMovie.fromJson(Map<String, dynamic> json)
       : adult = json['adult'] as bool?,
         backdropPath = json['backdrop_path'] as String?,
-        belongsToCollection = (json['belongs_to_collection'] as Map<String,dynamic>?) != null ? BelongsToCollection.fromJson(json['belongs_to_collection'] as Map<String,dynamic>) : null,
+        belongsToCollection =
+            (json['belongs_to_collection'] as Map<String, dynamic>?) != null
+                ? BelongsToCollection.fromJson(
+                    json['belongs_to_collection'] as Map<String, dynamic>)
+                : null,
         budget = json['budget'] as int?,
-        genres = (json['genres'] as List?)?.map((dynamic e) => Genres.fromJson(e as Map<String,dynamic>)).toList(),
+        genres = (json['genres'] as List?)
+            ?.map((dynamic e) => Genres.fromJson(e as Map<String, dynamic>))
+            .toList(),
         homepage = json['homepage'] as String?,
         id = json['id'] as int?,
         imdbId = json['imdb_id'] as String?,
@@ -67,12 +73,21 @@ class DetailFilm {
         overview = json['overview'] as String?,
         popularity = json['popularity'] as double?,
         posterPath = json['poster_path'] as String?,
-        productionCompanies = (json['production_companies'] as List?)?.map((dynamic e) => ProductionCompanies.fromJson(e as Map<String,dynamic>)).toList(),
-        productionCountries = (json['production_countries'] as List?)?.map((dynamic e) => ProductionCountries.fromJson(e as Map<String,dynamic>)).toList(),
+        productionCompanies = (json['production_companies'] as List?)
+            ?.map((dynamic e) =>
+                ProductionCompanies.fromJson(e as Map<String, dynamic>))
+            .toList(),
+        productionCountries = (json['production_countries'] as List?)
+            ?.map((dynamic e) =>
+                ProductionCountries.fromJson(e as Map<String, dynamic>))
+            .toList(),
         releaseDate = json['release_date'] as String?,
         revenue = json['revenue'] as int?,
         runtime = json['runtime'] as int?,
-        spokenLanguages = (json['spoken_languages'] as List?)?.map((dynamic e) => SpokenLanguages.fromJson(e as Map<String,dynamic>)).toList(),
+        spokenLanguages = (json['spoken_languages'] as List?)
+            ?.map((dynamic e) =>
+                SpokenLanguages.fromJson(e as Map<String, dynamic>))
+            .toList(),
         status = json['status'] as String?,
         tagline = json['tagline'] as String?,
         title = json['title'] as String?,
@@ -81,32 +96,34 @@ class DetailFilm {
         voteCount = json['vote_count'] as int?;
 
   Map<String, dynamic> toJson() => {
-    'adult' : adult,
-    'backdrop_path' : backdropPath,
-    'belongs_to_collection' : belongsToCollection?.toJson(),
-    'budget' : budget,
-    'genres' : genres?.map((e) => e.toJson()).toList(),
-    'homepage' : homepage,
-    'id' : id,
-    'imdb_id' : imdbId,
-    'original_language' : originalLanguage,
-    'original_title' : originalTitle,
-    'overview' : overview,
-    'popularity' : popularity,
-    'poster_path' : posterPath,
-    'production_companies' : productionCompanies?.map((e) => e.toJson()).toList(),
-    'production_countries' : productionCountries?.map((e) => e.toJson()).toList(),
-    'release_date' : releaseDate,
-    'revenue' : revenue,
-    'runtime' : runtime,
-    'spoken_languages' : spokenLanguages?.map((e) => e.toJson()).toList(),
-    'status' : status,
-    'tagline' : tagline,
-    'title' : title,
-    'video' : video,
-    'vote_average' : voteAverage,
-    'vote_count' : voteCount
-  };
+        'adult': adult,
+        'backdrop_path': backdropPath,
+        'belongs_to_collection': belongsToCollection?.toJson(),
+        'budget': budget,
+        'genres': genres?.map((e) => e.toJson()).toList(),
+        'homepage': homepage,
+        'id': id,
+        'imdb_id': imdbId,
+        'original_language': originalLanguage,
+        'original_title': originalTitle,
+        'overview': overview,
+        'popularity': popularity,
+        'poster_path': posterPath,
+        'production_companies':
+            productionCompanies?.map((e) => e.toJson()).toList(),
+        'production_countries':
+            productionCountries?.map((e) => e.toJson()).toList(),
+        'release_date': releaseDate,
+        'revenue': revenue,
+        'runtime': runtime,
+        'spoken_languages': spokenLanguages?.map((e) => e.toJson()).toList(),
+        'status': status,
+        'tagline': tagline,
+        'title': title,
+        'video': video,
+        'vote_average': voteAverage,
+        'vote_count': voteCount
+      };
 }
 
 class BelongsToCollection {
@@ -129,11 +146,11 @@ class BelongsToCollection {
         backdropPath = json['backdrop_path'] as String?;
 
   Map<String, dynamic> toJson() => {
-    'id' : id,
-    'name' : name,
-    'poster_path' : posterPath,
-    'backdrop_path' : backdropPath
-  };
+        'id': id,
+        'name': name,
+        'poster_path': posterPath,
+        'backdrop_path': backdropPath
+      };
 }
 
 class Genres {
@@ -149,10 +166,7 @@ class Genres {
       : id = json['id'] as int?,
         name = json['name'] as String?;
 
-  Map<String, dynamic> toJson() => {
-    'id' : id,
-    'name' : name
-  };
+  Map<String, dynamic> toJson() => {'id': id, 'name': name};
 }
 
 class ProductionCompanies {
@@ -175,11 +189,11 @@ class ProductionCompanies {
         originCountry = json['origin_country'] as String?;
 
   Map<String, dynamic> toJson() => {
-    'id' : id,
-    'logo_path' : logoPath,
-    'name' : name,
-    'origin_country' : originCountry
-  };
+        'id': id,
+        'logo_path': logoPath,
+        'name': name,
+        'origin_country': originCountry
+      };
 }
 
 class ProductionCountries {
@@ -195,10 +209,7 @@ class ProductionCountries {
       : iso31661 = json['iso_3166_1'] as String?,
         name = json['name'] as String?;
 
-  Map<String, dynamic> toJson() => {
-    'iso_3166_1' : iso31661,
-    'name' : name
-  };
+  Map<String, dynamic> toJson() => {'iso_3166_1': iso31661, 'name': name};
 }
 
 class SpokenLanguages {
@@ -217,9 +228,6 @@ class SpokenLanguages {
         iso6391 = json['iso_639_1'] as String?,
         name = json['name'] as String?;
 
-  Map<String, dynamic> toJson() => {
-    'english_name' : englishName,
-    'iso_639_1' : iso6391,
-    'name' : name
-  };
+  Map<String, dynamic> toJson() =>
+      {'english_name': englishName, 'iso_639_1': iso6391, 'name': name};
 }

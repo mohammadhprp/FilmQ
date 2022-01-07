@@ -7,8 +7,11 @@ import 'package:film_q/screen/detail_screen.dart';
 class NewMovies extends StatelessWidget {
   final String name;
   final String image;
+  final String mediaType;
   final int id;
-  const NewMovies(this.name, this.image, this.id, {Key? key}) : super(key: key);
+
+  const NewMovies(this.name, this.image, this.mediaType, this.id, {Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +24,12 @@ class NewMovies extends StatelessWidget {
                 children: [
                   CachedNetworkImage(
                     imageUrl: "${api.Url.imageUrl}/original$image",
-                    progressIndicatorBuilder: (context, url, downloadProgress) =>
-                        CircularProgressIndicator(value: downloadProgress.progress),
-                    errorWidget: (context, url, error) => const Icon(Icons.error),
+                    progressIndicatorBuilder:
+                        (context, url, downloadProgress) => Center(
+                            child: CircularProgressIndicator(
+                                value: downloadProgress.progress)),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
                     fit: BoxFit.cover,
                   ),
                   Positioned(

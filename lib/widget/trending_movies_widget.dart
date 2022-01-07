@@ -6,9 +6,11 @@ import 'package:film_q/screen/detail_screen.dart';
 
 class TrendingMovies extends StatelessWidget {
   final String poster;
+  final String mediaType;
   final int id;
 
-  TrendingMovies(this.poster, this.id, {Key? key}) : super(key: key);
+  TrendingMovies(this.poster, this.mediaType, this.id, {Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,9 @@ class TrendingMovies extends StatelessWidget {
             child: CachedNetworkImage(
               imageUrl: "${api.Url.imageUrl}/original$poster",
               progressIndicatorBuilder: (context, url, downloadProgress) =>
-                  Center(child: CircularProgressIndicator(value: downloadProgress.progress)),
+                  Center(
+                      child: CircularProgressIndicator(
+                          value: downloadProgress.progress)),
               errorWidget: (context, url, error) => const Icon(Icons.error),
               fit: BoxFit.cover,
               width: width * 0.72,
@@ -33,7 +37,8 @@ class TrendingMovies extends StatelessWidget {
             ),
           ),
           onTap: () {
-            Navigator.pushNamed(context, DetailScreen.routeName, arguments: id);
+            Navigator.pushNamed(context, DetailScreen.routeName,
+                arguments: {"id": id, "media_type": mediaType});
           },
         ),
       ),
