@@ -73,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               CarouselSlider.builder(
                                   itemCount: snapshot.data!.results!.length,
                                   options: CarouselOptions(
-                                    autoPlay: true,
+                                    autoPlay: false,
                                     autoPlayInterval:
                                         const Duration(seconds: 5),
                                     height: 350,
@@ -84,7 +84,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                   itemBuilder: (context, index, id) {
                                     return TrendingMovies(
-                                        "${snapshot.data!.results![index].posterPath}");
+                                        "${snapshot.data!.results![index].posterPath}",
+                                        snapshot.data!.results![index].id!
+                                            .toInt());
                                   }),
                             ],
                           ),
@@ -111,6 +113,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                       autoPlay: false,
                                       aspectRatio: 2.0,
                                       enlargeCenterPage: true,
+                                      enableInfiniteScroll: false,
+                                      initialPage: 0,
                                       enlargeStrategy:
                                           CenterPageEnlargeStrategy.height,
                                     ),
@@ -130,7 +134,7 @@ class _HomeScreenState extends State<HomeScreen> {
             print(snapshot.error);
             return Text("${snapshot.error}");
           }
-          return const CircularProgressIndicator();
+          return const Center(child:  CircularProgressIndicator());
         });
   }
 }
