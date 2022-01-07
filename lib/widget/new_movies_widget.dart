@@ -16,9 +16,11 @@ class NewMovies extends StatelessWidget {
             borderRadius: const BorderRadius.all(Radius.circular(5.0)),
             child: Stack(
               children: [
-                Image(
-                  image: CachedNetworkImageProvider(
-                      "${api.Url.imageUrl}/original$image"),
+                CachedNetworkImage(
+                  imageUrl: "${api.Url.imageUrl}/original$image",
+                  progressIndicatorBuilder: (context, url, downloadProgress) =>
+                      CircularProgressIndicator(value: downloadProgress.progress),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
                   fit: BoxFit.cover,
                 ),
                 Positioned(
