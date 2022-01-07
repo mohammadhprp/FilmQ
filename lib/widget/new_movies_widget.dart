@@ -62,7 +62,7 @@ class NewMovies extends StatelessWidget {
                 ],
               )),
           onTap: () {
-            Navigator.pushNamed(context, DetailScreen.routeName, arguments: id);
+            Navigator.pushNamed(context, DetailScreen.routeName, arguments: {"id": id, "media_type": mediaType});
           },
         ));
   }
