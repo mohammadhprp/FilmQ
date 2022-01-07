@@ -124,7 +124,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   "movie"
                                               ? "${snapshot.data!.results![index].title}"
                                               : "${snapshot.data!.results![index].name}",
-                                          "${snapshot.data!.results![index].backdropPath}");
+                                          "${snapshot.data!.results![index].backdropPath}",
+                                          snapshot.data!.results![index].id!
+                                              .toInt());
                                     }),
                               ],
                             ))
