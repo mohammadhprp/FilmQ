@@ -57,8 +57,11 @@ class _DetailMovieImageState extends State<DetailMovieImage> {
                         "${api.Url.imageUrl}/original${snapshot.data!.backdrops![index].filePath}",
                     progressIndicatorBuilder:
                         (context, url, downloadProgress) =>
-                            CircularProgressIndicator(
-                                value: downloadProgress.progress),
+                            Align(
+                              alignment: Alignment.center,
+                              child: CircularProgressIndicator(
+                                  value: downloadProgress.progress),
+                            ),
                     errorWidget: (context, url, error) =>
                         const Icon(Icons.error),
                     fit: BoxFit.fitWidth,
