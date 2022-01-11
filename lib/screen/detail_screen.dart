@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:film_q/model/detail_movie.dart' as movie;
 import 'package:film_q/model/detail_tv.dart' as tv;
-import 'package:film_q/service/film_service.dart';
+import 'package:film_q/service/detail_film_service.dart';
 import 'package:film_q/widget/detail_movies_widget.dart';
 import 'package:film_q/widget/detail_tv_widget.dart';
 
@@ -36,7 +36,6 @@ class _DetailScreenState extends State<DetailScreen> {
     } else if (filmType == "tv") {
       _fetchDetailTV = fechDetailTV(filmId);
     }
-
     super.didChangeDependencies();
   }
 
@@ -66,7 +65,20 @@ class _DetailScreenState extends State<DetailScreen> {
                       ],
                     ),
                     body: Container(
-                        color: const Color(0xFF262626),
+                        decoration: const BoxDecoration(
+                          gradient: LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              colors: [
+                                // Colors.black12,
+                                Colors.black,
+                                Color(0xFF262626)
+                              ],
+                              stops: [
+                                0.0,
+                                2.0
+                              ]),
+                        ),
                         child: DetailMovies(
                             snapshot.data!.id as int,
                             "movie",
@@ -114,8 +126,23 @@ class _DetailScreenState extends State<DetailScreen> {
                         ],
                       ),
                       body: Container(
-                          color: const Color(0xFF262626),
+                          decoration: const BoxDecoration(
+                            gradient: LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [
+                                  // Colors.black12,
+                                  Colors.black,
+                                  Color(0xFF262626)
+                                ],
+                                stops: [
+                                  0.0,
+                                  2.0
+                                ]),
+                          ),
                           child: DetailTV(
+                              snapshot.data!.id as int,
+                              "tv",
                               "${snapshot.data!.name}",
                               "${snapshot.data!.backdropPath}",
                               "${snapshot.data!.overview}",

@@ -1,11 +1,11 @@
-class DetailMovieImage {
+class DetailFilmImage {
   final List<Backdrops>? backdrops;
 
-  DetailMovieImage({
+  DetailFilmImage({
     this.backdrops,
   });
 
-  DetailMovieImage.fromJson(Map<String, dynamic> json)
+  DetailFilmImage.fromJson(Map<String, dynamic> json)
       : backdrops = (json['backdrops'] as List?)?.map((dynamic e) => Backdrops.fromJson(e as Map<String,dynamic>)).toList();
 
   Map<String, dynamic> toJson() => {

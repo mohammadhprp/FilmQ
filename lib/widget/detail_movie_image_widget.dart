@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 import 'package:film_q/model/api.dart' as api;
-import 'package:film_q/model/detail_movie_image.dart' as model;
-import 'package:film_q/service/detail_movie_image_service.dart';
+import 'package:film_q/model/detail_film_image.dart' as model;
+import 'package:film_q/service/detail_film_image_service.dart';
 
 class DetailMovieImage extends StatefulWidget {
   final int id;
@@ -18,7 +18,7 @@ class DetailMovieImage extends StatefulWidget {
 }
 
 class _DetailMovieImageState extends State<DetailMovieImage> {
-  late Future<model.DetailMovieImage> _fechDetailMovieImage;
+  late Future<model.DetailFilmImage> _fechDetailFilmImage;
 
   @override
   void initState() {
@@ -27,12 +27,7 @@ class _DetailMovieImageState extends State<DetailMovieImage> {
 
   @override
   void didChangeDependencies() {
-    if (widget.type == "movie") {
-      _fechDetailMovieImage = fechDetailMovieImage(widget.id);
-    }
-    // else if (widget.id == "tv") {
-    //   _fetchDetailTV = fechDetailTV(filmId);
-    // }
+    _fechDetailFilmImage = fechDetailMovieImage(widget.id, widget.type);
     super.didChangeDependencies();
   }
 
@@ -40,8 +35,8 @@ class _DetailMovieImageState extends State<DetailMovieImage> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    return FutureBuilder<model.DetailMovieImage>(
-        future: _fechDetailMovieImage,
+    return FutureBuilder<model.DetailFilmImage>(
+        future: _fechDetailFilmImage,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return CarouselSlider.builder(
@@ -56,12 +51,11 @@ class _DetailMovieImageState extends State<DetailMovieImage> {
                     imageUrl:
                         "${api.Url.imageUrl}/original${snapshot.data!.backdrops![index].filePath}",
                     progressIndicatorBuilder:
-                        (context, url, downloadProgress) =>
-                            Align(
-                              alignment: Alignment.center,
-                              child: CircularProgressIndicator(
-                                  value: downloadProgress.progress),
-                            ),
+                        (context, url, downloadProgress) => Align(
+                      alignment: Alignment.center,
+                      child: CircularProgressIndicator(
+                          value: downloadProgress.progress),
+                    ),
                     errorWidget: (context, url, error) =>
                         const Icon(Icons.error),
                     fit: BoxFit.fitWidth,
