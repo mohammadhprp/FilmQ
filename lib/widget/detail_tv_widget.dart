@@ -1,3 +1,4 @@
+import 'package:film_q/screen/credits_screen.dart';
 import 'package:film_q/widget/detail_movie_image_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -163,7 +164,6 @@ class DetailTV extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      // TODO: Add clock icon behind runtime
                       Row(
                         children: [
                           const Icon(
@@ -240,7 +240,22 @@ class DetailTV extends StatelessWidget {
                             color: Colors.white,
                             fontWeight: FontWeight.bold)),
                     DetailMovieImage(id, type),
+
                   ],
+                ),
+                Container(
+                  margin: const EdgeInsets.only(bottom: 50),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text('Cast',
+                          style: TextStyle(
+                              fontSize: 24,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold)),
+                      CreditsScreen(id: id, type: type),
+                    ],
+                  ),
                 ),
               ],
             ),

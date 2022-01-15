@@ -44,7 +44,7 @@ class _DetailMovieImageState extends State<DetailMovieImage> {
                 options: CarouselOptions(
                   aspectRatio: 2.0,
                   enlargeCenterPage: true,
-                  autoPlay: false,
+                  autoPlay: true,
                 ),
                 itemBuilder: (context, index, id) {
                   return CachedNetworkImage(

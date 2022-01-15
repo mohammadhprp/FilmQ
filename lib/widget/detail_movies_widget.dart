@@ -1,3 +1,5 @@
+import 'package:film_q/model/credits.dart';
+import 'package:film_q/screen/credits_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
@@ -22,8 +24,7 @@ class DetailMovies extends StatelessWidget {
   final double voteAverage;
   final int voteCount;
 
-  const DetailMovies(
-      this.id,
+  const DetailMovies(this.id,
       this.type,
       this.name,
       this.image,
@@ -41,8 +42,14 @@ class DetailMovies extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery
+        .of(context)
+        .size
+        .width;
+    double height = MediaQuery
+        .of(context)
+        .size
+        .height;
 
     final dateTime = DateTime.parse(releaseDate);
     final format = DateFormat('yyyy');
@@ -53,7 +60,10 @@ class DetailMovies extends StatelessWidget {
     final minute = runtime % 60;
 
     return SizedBox(
-      height: MediaQuery.of(context).size.height,
+      height: MediaQuery
+          .of(context)
+          .size
+          .height,
       child: Stack(children: [
         CachedNetworkImage(
           imageUrl: "${api.Url.imageUrl}/original$image",
@@ -84,157 +94,182 @@ class DetailMovies extends StatelessWidget {
           right: 0,
           bottom: 0,
           child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              // crossAxisAlignment: CrossAxisAlignment.baseline,
-              children: [
-                Row(
-                  children: [
-                    Flexible(
-                      child: Text(
-                        name,
-                        style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.all(5),
-                      margin: const EdgeInsets.only(left: 20),
-                      decoration: const BoxDecoration(
-                          color: Color.fromRGBO(243, 67, 105, 1),
-                          borderRadius: BorderRadius.all(Radius.circular(50))),
-                      child: Text(year,
-                          style: const TextStyle(
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white)),
-                    ),
-                  ],
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 10, bottom: 10),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
+            child: Padding(
+              padding: EdgeInsets.only(
+                  bottom: MediaQuery
+                      .of(context)
+                      .viewInsets
+                      .bottom,
+                  left: 10,
+                  right: 10),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                // crossAxisAlignment: CrossAxisAlignment.baseline,
+                children: [
+                  Row(
                     children: [
-                      const SizedBox(
-                          width: 10,
-                          child: Text(
-                            '•',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold),
-                          )),
-                      SizedBox(
-                        height: 20,
-                        child: ListView.separated(
-                            shrinkWrap: true,
-                            scrollDirection: Axis.horizontal,
-                            itemCount: genres.length,
-                            separatorBuilder: (context, index) {
-                              return Container(
-                                width: 1,
-                                color: Colors.white30,
-                                margin: const EdgeInsets.only(
-                                    left: 7.0, right: 7.0),
-                              );
-                            },
-                            itemBuilder: (context, index) {
-                              return Text(
-                                genres[index].name.toString(),
+                      Flexible(
+                        child: Text(
+                          name,
+                          style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.all(5),
+                        margin: const EdgeInsets.only(left: 20),
+                        decoration: const BoxDecoration(
+                            color: Color.fromRGBO(243, 67, 105, 1),
+                            borderRadius: BorderRadius.all(
+                                Radius.circular(50))),
+                        child: Text(year,
+                            style: const TextStyle(
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white)),
+                      ),
+                    ],
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(top: 10, bottom: 10),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        const SizedBox(
+                            width: 10,
+                            child: Text(
+                              '•',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold),
+                            )),
+                        SizedBox(
+                          height: 20,
+                          child: ListView.separated(
+                              shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
+                              itemCount: genres.length,
+                              separatorBuilder: (context, index) {
+                                return Container(
+                                  width: 1,
+                                  color: Colors.white30,
+                                  margin: const EdgeInsets.only(
+                                      left: 7.0, right: 7.0),
+                                );
+                              },
+                              itemBuilder: (context, index) {
+                                return Text(
+                                  genres[index].name.toString(),
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.white),
+                                );
+                              }),
+                        )
+                      ],
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(bottom: 30, top: 12),
+                    alignment: Alignment.centerLeft,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Row(
+                          children: [
+                            const Icon(
+                              Icons.watch_later_outlined,
+                              size: 15,
+                              color: Colors.white,
+                            ),
+                            const SizedBox(
+                              width: 6,
+                            ),
+                            Text("${hour.toStringAsFixed(0)}h ${minute}m",
                                 style: const TextStyle(
                                     fontWeight: FontWeight.w400,
-                                    color: Colors.white),
-                              );
-                            }),
-                      )
-                    ],
+                                    color: Colors.white,
+                                    fontSize: 15)),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            const Icon(
+                              Icons.star,
+                              size: 15,
+                              color: Colors.white,
+                            ),
+                            const SizedBox(
+                              width: 6,
+                            ),
+                            Text("$voteAverage ($voteCount)",
+                                style: const TextStyle(
+                                    color: Colors.white, fontSize: 15))
+                          ],
+                        )
+                      ],
+                    ),
                   ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(bottom: 30, top: 12),
-                  alignment: Alignment.centerLeft,
-                  child: Row(
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      // TODO: Add clock icon behind runtime
-                      Row(
-                        children: [
-                          const Icon(
-                            Icons.watch_later_outlined,
-                            size: 15,
-                            color: Colors.white,
-                          ),
-                          const SizedBox(
-                            width: 6,
-                          ),
-                          Text("${hour.toStringAsFixed(0)}h ${minute}m",
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  color: Colors.white,
-                                  fontSize: 15)),
-                        ],
-                      ),
-
-                      Row(
-                        children: [
-                          const Icon(
-                            Icons.star,
-                            size: 15,
-                            color: Colors.white,
-                          ),
-                          const SizedBox(
-                            width: 6,
-                          ),
-                          Text("$voteAverage ($voteCount)",
-                              style: const TextStyle(
-                                  color: Colors.white, fontSize: 15))
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Overview',
-                      style: TextStyle(
-                          fontSize: 24,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Text(
-                      overview,
-                      style: const TextStyle(
-                          fontSize: 16,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w400),
-                    )
-                  ],
-                ),
-                const SizedBox(
-                  height: 35,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text('Images',
+                      const Text(
+                        'Overview',
                         style: TextStyle(
                             fontSize: 24,
                             color: Colors.white,
-                            fontWeight: FontWeight.bold)),
-                    DetailMovieImage(id, type),
-                  ],
-                ),
-
-              ],
+                            fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      Text(
+                        overview,
+                        style: const TextStyle(
+                            fontSize: 16,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w400),
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 35,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text('Images',
+                          style: TextStyle(
+                              fontSize: 24,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold)),
+                      DetailMovieImage(id, type),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 35,
+                  ),
+                  // TODO: add cast for detail screen
+                  Container(
+                    margin: const EdgeInsets.only(bottom: 50),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text('Cast',
+                            style: TextStyle(
+                                fontSize: 24,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold)),
+                        CreditsScreen(id: id, type: type),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
