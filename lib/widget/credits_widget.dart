@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flip_card/flip_card.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 import 'package:film_q/model/api.dart' as api;
@@ -20,14 +19,14 @@ class Credits extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
+    final textTheme = Theme.of(context).textTheme;
+    final size = MediaQuery.of(context).size;
     return Card(
         elevation: 3.0,
         child: Column(children: [
           Flexible(
             child: SizedBox(
-              // height: 300.0,
-              width: width / 0.4,
+              width: size.width / 0.4,
               child: CachedNetworkImage(
                 imageUrl: "${api.Url.imageUrl}/original$profile",
                 progressIndicatorBuilder: (context, url, downloadProgress) =>
@@ -44,7 +43,10 @@ class Credits extends StatelessWidget {
           ),
           ListTile(
             title: Text(name),
-            subtitle: Text(character),
+            subtitle: Text(
+              character,
+              style: textTheme.subtitle2!.copyWith(color: Colors.black54),
+            ),
           ),
         ]));
   }

@@ -33,8 +33,8 @@ class _DetailFilmImageState extends State<DetailFilmImage> {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
+    final textTheme = Theme.of(context).textTheme;
+    final size = MediaQuery.of(context).size;
     return FutureBuilder<model.DetailFilmImage>(
         future: _fechDetailFilmImage,
         builder: (context, snapshot) {
@@ -44,7 +44,7 @@ class _DetailFilmImageState extends State<DetailFilmImage> {
                 options: CarouselOptions(
                   aspectRatio: 2.0,
                   enlargeCenterPage: true,
-                  autoPlay: true,
+                  autoPlay: false,
                 ),
                 itemBuilder: (context, index, id) {
                   return CachedNetworkImage(

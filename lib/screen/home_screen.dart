@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 
 import 'package:film_q/model/film.dart';
 import 'package:film_q/service/film_service.dart';
+import 'package:film_q/widget/drawer.dart';
 import 'package:film_q/widget/trending_movies_widget.dart';
 import 'package:film_q/widget/new_movies_widget.dart';
 
@@ -24,6 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
     return FutureBuilder<Film>(
         future: _fetchFilm,
         builder: (context, snapshot) {
@@ -35,10 +37,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   centerTitle: true,
                   backgroundColor: Colors.transparent,
                   elevation: 0,
-                  leading: IconButton(
-                    icon: const Icon(Icons.menu_outlined),
-                    onPressed: () {},
-                  ),
                   actions: [
                     IconButton(
                       icon: const Icon(Icons.search),
@@ -46,6 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     )
                   ],
                 ),
+                drawer: DrawerAppbar(),
                 body: Container(
                     color: const Color(0xFF262626),
                     child: Column(
@@ -62,12 +61,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                 alignment: Alignment.topLeft,
                                 margin: const EdgeInsets.only(
                                     left: 22, bottom: 10, top: 90),
-                                child: const Text(
+                                child: Text(
                                   'Trending',
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold),
+                                  style: textTheme.headline6
                                 ),
                               ),
                               CarouselSlider.builder(
@@ -100,12 +96,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                   alignment: Alignment.topLeft,
                                   margin: const EdgeInsets.only(
                                       left: 25, bottom: 10),
-                                  child: const Text(
+                                  child: Text(
                                     'New Movies',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold),
+                                    style: textTheme.headline6
                                   ),
                                 ),
                                 CarouselSlider.builder(

@@ -15,6 +15,8 @@ class NewMovies extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    final size = MediaQuery.of(context).size;
     return Container(
         margin: const EdgeInsets.all(5.0),
         child: InkWell(
@@ -51,11 +53,7 @@ class NewMovies extends StatelessWidget {
                           vertical: 10.0, horizontal: 20.0),
                       child: Text(
                         name,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w400,
-                        ),
+                        style: textTheme.subtitle2
                       ),
                     ),
                   ),

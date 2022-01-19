@@ -1,4 +1,3 @@
-import 'package:film_q/model/credits.dart';
 import 'package:film_q/screen/credits_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -24,7 +23,8 @@ class DetailMovies extends StatelessWidget {
   final double voteAverage;
   final int voteCount;
 
-  const DetailMovies(this.id,
+  const DetailMovies(
+      this.id,
       this.type,
       this.name,
       this.image,
@@ -42,14 +42,8 @@ class DetailMovies extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery
-        .of(context)
-        .size
-        .width;
-    double height = MediaQuery
-        .of(context)
-        .size
-        .height;
+    final textTheme = Theme.of(context).textTheme;
+    final size = MediaQuery.of(context).size;
 
     final dateTime = DateTime.parse(releaseDate);
     final format = DateFormat('yyyy');
@@ -60,10 +54,7 @@ class DetailMovies extends StatelessWidget {
     final minute = runtime % 60;
 
     return SizedBox(
-      height: MediaQuery
-          .of(context)
-          .size
-          .height,
+      height: size.height,
       child: Stack(children: [
         CachedNetworkImage(
           imageUrl: "${api.Url.imageUrl}/original$image",
@@ -71,12 +62,12 @@ class DetailMovies extends StatelessWidget {
               CircularProgressIndicator(value: downloadProgress.progress),
           errorWidget: (context, url, error) => const Icon(Icons.error),
           fit: BoxFit.fitWidth,
-          width: width / 0.5,
+          width: size.width / 0.5,
           // height: height,
         ),
         Container(
-          height: width * 0.565,
-          width: width,
+          height: size.width * 0.565,
+          width: size.width,
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topCenter,
@@ -89,17 +80,14 @@ class DetailMovies extends StatelessWidget {
           ),
         ),
         Positioned(
-          top: height * 0.24,
-          left: width * 0.04,
+          top: size.height * 0.24,
+          left: size.width * 0.04,
           right: 0,
           bottom: 0,
           child: SingleChildScrollView(
             child: Padding(
               padding: EdgeInsets.only(
-                  bottom: MediaQuery
-                      .of(context)
-                      .viewInsets
-                      .bottom,
+                  bottom: MediaQuery.of(context).viewInsets.bottom,
                   left: 10,
                   right: 10),
               child: Column(
@@ -109,25 +97,18 @@ class DetailMovies extends StatelessWidget {
                   Row(
                     children: [
                       Flexible(
-                        child: Text(
-                          name,
-                          style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold),
-                        ),
+                        child: Text(name, style: textTheme.headline6),
                       ),
                       Container(
                         padding: const EdgeInsets.all(5),
                         margin: const EdgeInsets.only(left: 20),
                         decoration: const BoxDecoration(
                             color: Color.fromRGBO(243, 67, 105, 1),
-                            borderRadius: BorderRadius.all(
-                                Radius.circular(50))),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(50))),
                         child: Text(year,
-                            style: const TextStyle(
-                                fontWeight: FontWeight.w600,
-                                color: Colors.white)),
+                            style: textTheme.subtitle2!
+                                .copyWith(fontWeight: FontWeight.w600)),
                       ),
                     ],
                   ),
@@ -137,21 +118,18 @@ class DetailMovies extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        const SizedBox(
+                        SizedBox(
                             width: 10,
                             child: Text(
                               '•',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold),
+                              style: textTheme.headline6,
                             )),
                         SizedBox(
                           height: 20,
                           child: ListView.separated(
                               shrinkWrap: true,
                               scrollDirection: Axis.horizontal,
-                              itemCount: genres.length,
+                              itemCount: genres.length >= 3 ? 3 : genres.length,
                               separatorBuilder: (context, index) {
                                 return Container(
                                   width: 1,
@@ -161,12 +139,8 @@ class DetailMovies extends StatelessWidget {
                                 );
                               },
                               itemBuilder: (context, index) {
-                                return Text(
-                                  genres[index].name.toString(),
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.white),
-                                );
+                                return Text(genres[index].name.toString(),
+                                    style: textTheme.subtitle2);
                               }),
                         )
                       ],
@@ -189,11 +163,11 @@ class DetailMovies extends StatelessWidget {
                             const SizedBox(
                               width: 6,
                             ),
-                            Text("${hour.toStringAsFixed(0)}h ${minute}m",
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.w400,
-                                    color: Colors.white,
-                                    fontSize: 15)),
+                            hour > 1
+                                ? Text("${hour.toStringAsFixed(0)}h ${minute}m",
+                                style: textTheme.subtitle2)
+                                : Text("${minute}m",
+                                style: textTheme.subtitle2)
                           ],
                         ),
                         Row(
@@ -207,8 +181,7 @@ class DetailMovies extends StatelessWidget {
                               width: 6,
                             ),
                             Text("$voteAverage ($voteCount)",
-                                style: const TextStyle(
-                                    color: Colors.white, fontSize: 15))
+                                style: textTheme.subtitle2)
                           ],
                         )
                       ],
@@ -217,23 +190,14 @@ class DetailMovies extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
+                      Text(
                         'Overview',
-                        style: TextStyle(
-                            fontSize: 24,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
+                        style: textTheme.headline6!.copyWith(fontSize: 24),
                       ),
                       const SizedBox(
                         height: 15,
                       ),
-                      Text(
-                        overview,
-                        style: const TextStyle(
-                            fontSize: 16,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w400),
-                      )
+                      Text(overview, style: textTheme.caption)
                     ],
                   ),
                   const SizedBox(
@@ -242,28 +206,24 @@ class DetailMovies extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('Images',
-                          style: TextStyle(
-                              fontSize: 24,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold)),
+                      Text('Images',
+                          style: textTheme.headline6!.copyWith(fontSize: 24)),
                       DetailFilmImage(id, type),
                     ],
                   ),
                   const SizedBox(
-                    height: 35,
+                    height: 45,
                   ),
-                  // TODO: add cast for detail screen
                   Container(
                     margin: const EdgeInsets.only(bottom: 50),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text('Cast',
-                            style: TextStyle(
-                                fontSize: 24,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold)),
+                        Text('Cast',
+                            style: textTheme.headline6!.copyWith(fontSize: 24)),
+                        const SizedBox(
+                          height: 15,
+                        ),
                         CreditsScreen(id: id, type: type),
                       ],
                     ),

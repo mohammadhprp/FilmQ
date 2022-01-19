@@ -8,11 +8,17 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final originalTheme = Theme.of(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Test App',
+      title: 'Film Q',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.blueGrey,
+        textTheme: originalTheme.textTheme.copyWith(
+          subtitle2: originalTheme.textTheme.subtitle1!.copyWith(fontSize: 14, color: Colors.white, fontWeight: FontWeight.w400),
+              headline6:  originalTheme.textTheme.subtitle1!.copyWith(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold),
+          caption: originalTheme.textTheme.subtitle1!.copyWith(fontSize: 15, color: Colors.white, fontWeight: FontWeight.w400),
+        )
       ),
       home: const HomeScreen(),
       routes: {
