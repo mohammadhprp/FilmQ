@@ -40,6 +40,7 @@ dependencies:
   pinch_zoom_image_last: ^0.4.1
   logger: ^1.1.0
   flip_card: ^0.6.0
+  getwidget: ^2.0.4
 
 
 dev_dependencies:

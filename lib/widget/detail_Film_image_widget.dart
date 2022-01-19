@@ -6,18 +6,18 @@ import 'package:film_q/model/api.dart' as api;
 import 'package:film_q/model/detail_film_image.dart' as model;
 import 'package:film_q/service/detail_film_image_service.dart';
 
-class DetailMovieImage extends StatefulWidget {
+class DetailFilmImage extends StatefulWidget {
   final int id;
   final String type;
 
-  const DetailMovieImage(this.id, this.type, {Key? key}) : super(key: key);
+  const DetailFilmImage(this.id, this.type, {Key? key}) : super(key: key);
   static const routeName = '/detail-image';
 
   @override
-  State<DetailMovieImage> createState() => _DetailMovieImageState();
+  State<DetailFilmImage> createState() => _DetailFilmImageState();
 }
 
-class _DetailMovieImageState extends State<DetailMovieImage> {
+class _DetailFilmImageState extends State<DetailFilmImage> {
   late Future<model.DetailFilmImage> _fechDetailFilmImage;
 
   @override
@@ -27,7 +27,7 @@ class _DetailMovieImageState extends State<DetailMovieImage> {
 
   @override
   void didChangeDependencies() {
-    _fechDetailFilmImage = fechDetailMovieImage(widget.id, widget.type);
+    _fechDetailFilmImage = fechDetailFilmImage(widget.id, widget.type);
     super.didChangeDependencies();
   }
 

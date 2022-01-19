@@ -1,5 +1,5 @@
 import 'package:film_q/screen/credits_screen.dart';
-import 'package:film_q/widget/detail_movie_image_widget.dart';
+import 'package:film_q/widget/detail_Film_image_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:intl/intl.dart';
@@ -239,7 +239,7 @@ class DetailTV extends StatelessWidget {
                             fontSize: 24,
                             color: Colors.white,
                             fontWeight: FontWeight.bold)),
-                    DetailMovieImage(id, type),
+                    DetailFilmImage(id, type),
 
                   ],
                 ),

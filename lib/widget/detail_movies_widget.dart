@@ -7,7 +7,7 @@ import 'package:intl/intl.dart';
 
 import 'package:film_q/model/api.dart' as api;
 import 'package:film_q/model/detail_movie.dart';
-import 'package:film_q/widget/detail_movie_image_widget.dart';
+import 'package:film_q/widget/detail_Film_image_widget.dart';
 
 class DetailMovies extends StatelessWidget {
   final int id;
@@ -247,7 +247,7 @@ class DetailMovies extends StatelessWidget {
                               fontSize: 24,
                               color: Colors.white,
                               fontWeight: FontWeight.bold)),
-                      DetailMovieImage(id, type),
+                      DetailFilmImage(id, type),
                     ],
                   ),
                   const SizedBox(
