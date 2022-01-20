@@ -4,13 +4,18 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:film_q/model/api.dart' as api;
 import 'package:film_q/screen/detail_screen.dart';
 
-class NewMovies extends StatelessWidget {
+class FilmWidget extends StatelessWidget {
   final String name;
   final String image;
   final String mediaType;
   final int id;
 
-  const NewMovies(this.name, this.image, this.mediaType, this.id, {Key? key})
+  const FilmWidget(
+      {Key? key,
+      required this.name,
+      required this.image,
+      required this.mediaType,
+      required this.id})
       : super(key: key);
 
   @override
@@ -25,13 +30,13 @@ class NewMovies extends StatelessWidget {
               child: Stack(
                 children: [
                   CachedNetworkImage(
-                    imageUrl: "${api.Url.imageUrl}/original$image",
+                    imageUrl: "${api.Url.imageUrl}/w500$image",
                     progressIndicatorBuilder:
                         (context, url, downloadProgress) => Center(
-                            child: CircularProgressIndicator(
-                                value: downloadProgress.progress)),
+                        child: CircularProgressIndicator(
+                            value: downloadProgress.progress)),
                     errorWidget: (context, url, error) =>
-                        const Icon(Icons.error),
+                    const Icon(Icons.error),
                     fit: BoxFit.cover,
                   ),
                   Positioned(
@@ -52,8 +57,8 @@ class NewMovies extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           vertical: 10.0, horizontal: 20.0),
                       child: Text(
-                        name,
-                        style: textTheme.subtitle2
+                          name,
+                          style: textTheme.subtitle2
                       ),
                     ),
                   ),

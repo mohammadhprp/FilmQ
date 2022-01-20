@@ -47,3 +47,4 @@ app.*.map.json
 
 lib/model/api.dart
 lib/ignore
+lib/widget/drawer.dart
