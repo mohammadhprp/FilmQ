@@ -41,40 +41,51 @@ class _SearchScreenState extends State<SearchScreen> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return Scaffold(
-              extendBodyBehindAppBar: true,
-              appBar: AppBar(
-                title: Text(query),
-                backgroundColor: Colors.transparent,
-                elevation: 0,
-              ),
-              body: Container(
-                color: const Color(0xFF262626),
-                child: ListView.separated(
-                    separatorBuilder: (context, index) {
-                      return Divider(
-                        color: Colors.white10,
-                        indent: 12,
-                        endIndent: 12,
-                      );
-                    },
-                    itemCount: snapshot.data!.results!.length,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        margin: EdgeInsets.all(20),
-                        child: SearchResult(
-                          name: snapshot.data!.results![index].mediaType == "tv"
-                              ? "${snapshot.data!.results![index].name}"
-                              : "${snapshot.data!.results![index].title}",
-                          image: "${snapshot.data!.results![index].posterPath}",
-                          type: "${snapshot.data!.results![index].mediaType}",
-                          date: snapshot.data!.results![index].mediaType == "tv"
-                              ? "${snapshot.data!.results![index].firstAirDate}"
-                              : "${snapshot.data!.results![index].releaseDate}",
-                          id: snapshot.data!.results![index].id as int,
-                        ),
-                      );
-                    }),
-              ),
+              // extendBodyBehindAppBar: true,
+              body: NestedScrollView(
+                floatHeaderSlivers: true,
+                  headerSliverBuilder:
+                      (BuildContext context, bool innerBoxIsScrolled) => [
+                            SliverAppBar(
+                              floating: true,
+                              snap: true,
+                              title: Text(query),
+                              backgroundColor: Color(0xFF262626),
+                              // elevation: 0,
+                            ),
+                          ],
+                  body: Container(
+                    color: const Color(0xFF262626),
+                    child: ListView.separated(
+                        separatorBuilder: (context, index) {
+                          return Divider(
+                            color: Colors.white10,
+                            indent: 12,
+                            endIndent: 12,
+                          );
+                        },
+                        itemCount: snapshot.data!.results!.length,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            margin: EdgeInsets.all(13),
+                            child: SearchResult(
+                              name: snapshot.data!.results![index].mediaType ==
+                                      "tv"
+                                  ? "${snapshot.data!.results![index].name}"
+                                  : "${snapshot.data!.results![index].title}",
+                              image:
+                                  "${snapshot.data!.results![index].posterPath}",
+                              type:
+                                  "${snapshot.data!.results![index].mediaType}",
+                              date: snapshot.data!.results![index].mediaType ==
+                                      "tv"
+                                  ? "${snapshot.data!.results![index].firstAirDate}"
+                                  : "${snapshot.data!.results![index].releaseDate}",
+                              id: snapshot.data!.results![index].id as int,
+                            ),
+                          );
+                        }),
+                  )),
             );
           } else if (snapshot.hasError) {
             logger.e(snapshot.error);
@@ -110,7 +121,7 @@ class SearchResult extends StatelessWidget {
       child: ListTile(
         title: Text(
           name,
-          style: textTheme.headline6,
+          style: textTheme.headline6!.copyWith(fontWeight: FontWeight.w600),
         ),
         leading: ClipRRect(
           borderRadius: BorderRadius.circular(20),
@@ -125,14 +136,13 @@ class SearchResult extends StatelessWidget {
             width: 50,
             height: 50,
             fit: BoxFit.cover,
-            // height: height,
           ),
         ),
         subtitle: type == "tv"
             ? Row(
                 children: [
                   Icon(
-                    LineIcons.television,
+                    Icons.local_movies_outlined,
                     color: Colors.white,
                     size: 18,
                   ),
@@ -140,17 +150,15 @@ class SearchResult extends StatelessWidget {
                   Text('series ($year)'),
                 ],
               )
-            : Row(
-                children: [
-                  Icon(
-                    LineIcons.film,
-                    color: Colors.white,
-                    size: 18,
-                  ),
-                  SizedBox(width: 7),
-                  Text('Movie ($year)'),
-                ]
-              ),
+            : Row(children: [
+                Icon(
+                  Icons.movie_creation_outlined,
+                  color: Colors.white,
+                  size: 18,
+                ),
+                SizedBox(width: 7),
+                Text('Movie ($year)'),
+              ]),
         onTap: () {
           Navigator.pushNamed(context, DetailScreen.routeName,
               arguments: {"id": id, "media_type": type});
