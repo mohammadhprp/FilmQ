@@ -214,6 +214,7 @@ class DetailMovies extends StatelessWidget {
                   const SizedBox(
                     height: 45,
                   ),
+
                   Container(
                     margin: const EdgeInsets.only(bottom: 50),
                     child: Column(

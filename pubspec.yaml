@@ -41,6 +41,8 @@ dependencies:
   logger: ^1.1.0
   flip_card: ^0.6.0
   getwidget: ^2.0.4
+  flutter_typeahead: ^3.2.4
+  line_icons: ^2.0.1
 
 
 dev_dependencies:

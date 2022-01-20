@@ -1,7 +1,9 @@
+import 'package:film_q/screen/search_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:film_q/screen/home_screen.dart';
 import 'package:film_q/screen/detail_screen.dart';
+import 'package:film_q/screen/search_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -22,7 +24,8 @@ class MyApp extends StatelessWidget {
       ),
       home: const HomeScreen(),
       routes: {
-        DetailScreen.routeName: (context) => DetailScreen()
+        DetailScreen.routeName: (context) => DetailScreen(),
+        SearchScreen.routeName: (context) => SearchScreen()
       },
     );
   }
