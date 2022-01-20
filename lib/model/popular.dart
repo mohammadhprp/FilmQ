@@ -19,7 +19,8 @@ class Popular {
         totalPages = json['total_pages'] as int?,
         totalResults = json['total_results'] as int?;
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() =>
+      {
         'page': page,
         'results': results?.map((e) => e.toJson()).toList(),
         'total_pages': totalPages,
@@ -33,6 +34,7 @@ class Results {
   final List<int>? genreIds;
   final int? id;
   final String? name;
+  final String? tilte;
   final List<String>? originCountry;
   final String? originalLanguage;
   final String? originalName;
@@ -48,6 +50,7 @@ class Results {
     this.genreIds,
     this.id,
     this.name,
+    this.tilte,
     this.originCountry,
     this.originalLanguage,
     this.originalName,
@@ -60,9 +63,10 @@ class Results {
       : backdropPath = json['backdrop_path'] as String?,
         firstAirDate = json['first_air_date'] as String?,
         genreIds =
-            (json['genre_ids'] as List?)?.map((dynamic e) => e as int).toList(),
+        (json['genre_ids'] as List?)?.map((dynamic e) => e as int).toList(),
         id = json['id'] as int?,
         name = json['name'] as String?,
+        tilte = json['title'] as String?,
         originCountry = (json['origin_country'] as List?)
             ?.map((dynamic e) => e as String)
             .toList(),
@@ -72,12 +76,14 @@ class Results {
         posterPath = json['poster_path'] as String?,
         voteCount = json['vote_count'] as int?;
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() =>
+      {
         'backdrop_path': backdropPath,
         'first_air_date': firstAirDate,
         'genre_ids': genreIds,
         'id': id,
         'name': name,
+        'title': tilte,
         'origin_country': originCountry,
         'original_language': originalLanguage,
         'original_name': originalName,

@@ -20,13 +20,15 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late Future<Film> _fetchFilm;
-  late Future<Popular> _fetchPopular;
+  late Future<Popular> _fetchPopularTV;
+  late Future<Popular> _fetchPopularMoive;
 
   @override
   void initState() {
     super.initState();
     _fetchFilm = fechFilm();
-    _fetchPopular = service.fechPopular("tv");
+    _fetchPopularTV = service.fechPopular("tv");
+    _fetchPopularMoive = service.fechPopular("movie");
   }
 
   @override
@@ -159,7 +161,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   height: 20,
                                 ),
                                 FutureBuilder<Popular>(
-                                    future: _fetchPopular,
+                                    future: _fetchPopularTV,
                                     builder: (context, snapshot) {
                                       if (snapshot.hasData) {
                                         return Column(
@@ -168,7 +170,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               alignment: Alignment.topLeft,
                                               margin: const EdgeInsets.only(
                                                   left: 25, bottom: 10),
-                                              child: Text('What\'s Popular',
+                                              child: Text('What\'s Popular (TV)',
                                                   style: textTheme.headline6),
                                             ),
                                             CarouselSlider.builder(
@@ -179,7 +181,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   aspectRatio: 2.0,
                                                   enlargeCenterPage: true,
                                                   enableInfiniteScroll: false,
-                                                  initialPage: 0,
+                                                  initialPage: 1,
                                                   enlargeStrategy:
                                                       CenterPageEnlargeStrategy
                                                           .height,
@@ -192,6 +194,56 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     name:
                                                         "${snapshot.data!.results![index].name}",
                                                     mediaType: "tv",
+                                                    id: snapshot.data!
+                                                        .results![index].id!,
+                                                  );
+                                                }),
+                                          ],
+                                        );
+                                      } else if (snapshot.hasError) {
+                                        print(snapshot.error);
+                                        return Text("${snapshot.error}");
+                                      }
+                                      return const Center(
+                                          child: CircularProgressIndicator());
+                                    }),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                FutureBuilder<Popular>(
+                                    future: _fetchPopularMoive,
+                                    builder: (context, snapshot) {
+                                      if (snapshot.hasData) {
+                                        return Column(
+                                          children: [
+                                            Container(
+                                              alignment: Alignment.topLeft,
+                                              margin: const EdgeInsets.only(
+                                                  left: 25, bottom: 10),
+                                              child: Text('What\'s Popular (Movie)',
+                                                  style: textTheme.headline6),
+                                            ),
+                                            CarouselSlider.builder(
+                                                itemCount: snapshot
+                                                    .data!.results!.length,
+                                                options: CarouselOptions(
+                                                  autoPlay: false,
+                                                  aspectRatio: 2.0,
+                                                  enlargeCenterPage: true,
+                                                  enableInfiniteScroll: false,
+                                                  initialPage: 1,
+                                                  enlargeStrategy:
+                                                  CenterPageEnlargeStrategy
+                                                      .height,
+                                                ),
+                                                itemBuilder:
+                                                    (context, index, id) {
+                                                  return FilmWidget(
+                                                    image:
+                                                    "${snapshot.data!.results![index].backdropPath}",
+                                                    name:
+                                                    "${snapshot.data!.results![index].tilte}",
+                                                    mediaType: "movie",
                                                     id: snapshot.data!
                                                         .results![index].id!,
                                                   );
