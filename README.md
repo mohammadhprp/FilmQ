@@ -1,4 +1,4 @@
-# What Weather 🎥
+# Film Q 🎥
 
 > A movie application built with Flutter and The Movie Database (TMDB) API
 
