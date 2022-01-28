@@ -6,8 +6,8 @@
 
 <details>
 <summary>See ScreenShots</summary>
-<img style="margin: 30px;" src="https://i.ibb.co/hM5ZRWJ/Screenshot1.png" alt="" width=300></img>
-<img style="margin: 30px;" src="https://i.ibb.co/thL0zc6/Screenshot2.png" alt="" width=300></img>
+<img src="https://i.ibb.co/hM5ZRWJ/Screenshot1.png" alt="" width=300></img>
+<img src="https://i.ibb.co/thL0zc6/Screenshot2.png" alt="" width=300></img>
 </details>
 
 ## Getting Started
